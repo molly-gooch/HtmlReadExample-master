@@ -20,32 +20,20 @@ public class HtmlRead {
             String line;
 
             while ( (line = reader.readLine()) != null ) {
-                if((line.contains("http:") || line.contains("www.")) && line.contains("//")) {
+                if(line.contains("href")) {
 
-                   // System.out.println("og line: " +line);
-
-                    int indexHttp = line.indexOf("http");
-                    int indexWWW = line.indexOf("www.");
-
-                    if(indexHttp>-1){
-                        String newLine = line.substring(indexHttp);
-                        System.out.println(newLine);
-                    }
-                    if(indexHttp==-1){
-                        String newLine = line.substring(indexWWW);
-                        System.out.println(newLine);
-                    }
-
-                      //  String newLine = line.substring(indexHttp);
-                        //this line above is the issue
-
-                       // int indexWWW = line.indexOf("www.");
-                      //  newLine = line.substring(indexWWW);
+                    int indexHref = line.indexOf("href") + 6;
+                    String newLine = line.substring(indexHref);
 
 
+                    int end = newLine.indexOf("\"");
+                    int oEnd = newLine.indexOf("'");
 
-                    //System.out.println(newLine);
-
+                        if(end<oEnd && end>-1 || oEnd ==-1){
+                            System.out.println(newLine.substring(0, end));
+                        }else if(oEnd>-1) {
+                            System.out.println(newLine.substring(0, oEnd));
+                        }
 
                 }
             }
